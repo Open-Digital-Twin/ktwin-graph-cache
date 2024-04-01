@@ -20,3 +20,13 @@ docker push ghcr.io/open-digital-twin/ktwin-graph-store:0.1
 docker build -t dev.local/open-digital-twin/ktwin-graph-store:0.1 .
 kind load docker-image dev.local/open-digital-twin/ktwin-graph-store:0.1
 ```
+
+##
+
+```sh
+kubectl run curl \
+    --image=curlimages/curl --rm=true --restart=Never -ti -- \
+    -X GET -v \
+    -H "content-type: application/json"  \
+    http://ktwin-graph-store.ktwin.svc.cluster.local/api/v1/twin-graph
+```

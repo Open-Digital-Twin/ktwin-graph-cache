@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ktwin-graph-store
+  labels:
+    app.kubernetes.io/name: ktwin-graph-store
+    app.kubernetes.io/component: ktwin-graph-store
+    app.kubernetes.io/part-of: ktwin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ktwin-graph-store
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ktwin-graph-store
+        app.kubernetes.io/component: ktwin-graph-store
+        app.kubernetes.io/part-of: ktwin
+    spec:
+      containers:
+        - name: ktwin-graph-store
+          image: ghcr.io/open-digital-twin/ktwin-graph-store:0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CACHE_HOST
+              value: ktwin-graph-redis-master.ktwin.svc.cluster.local
+            - name: CACHE_HOST_REPLICAS
+              value: ktwin-graph-redis-replicas.ktwin.svc.cluster.local
+            - name: CACHE_PASSWORD
+              value: ZVlWWDdFd1ZtbXhLUENEbXdNdHlLVmdlOG9MZDJ0ODE=
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ktwin-graph-store
+  labels:
+    app.kubernetes.io/name: ktwin-graph-store
+spec:
+  selector:
+    app.kubernetes.io/name: ktwin-graph-store
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP
