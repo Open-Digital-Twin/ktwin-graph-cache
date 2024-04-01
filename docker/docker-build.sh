@@ -1,0 +1,1 @@
+docker build -t ktwin-graph-store:0.1 .

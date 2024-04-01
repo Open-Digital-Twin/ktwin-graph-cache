@@ -1,0 +1,375 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/twin-Instances": {
+            "post": {
+                "description": "This endpoint creates the Twin Instance.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInstances"
+                ],
+                "summary": "Create Twin Instance",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInstance"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-Instances/{instanceId}": {
+            "delete": {
+                "description": "This endpoint deletes the Twin Instance.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInstances"
+                ],
+                "summary": "Delete Twin Instance",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInstance"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-events": {
+            "get": {
+                "description": "do ping",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinEvents"
+                ],
+                "summary": "Get Twin Events",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.TwinEvent"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "This endpoint updates the latest TwinEvent.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinEvents"
+                ],
+                "summary": "Update Twin Event",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinEvent"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-events/{interfaceId}/{instanceId}": {
+            "get": {
+                "description": "do ping",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinEvents"
+                ],
+                "summary": "Get Twin Events",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.TwinEvent"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "This endpoint deletes the Twin Event Event.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinEvents"
+                ],
+                "summary": "Delete Twin Event Event",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/twin-instances": {
+            "get": {
+                "description": "This endpoint returns all Twin Instances registered in the Platform.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInstances"
+                ],
+                "summary": "Get All Twin Instances",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.TwinInstance"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-instances/{instanceId}/{id}": {
+            "get": {
+                "description": "This endpoint returns the Twin Instance by id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInstances"
+                ],
+                "summary": "Get Twin Instance by Id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInstance"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-interfaces": {
+            "get": {
+                "description": "This endpoint returns all Twin Interfaces registered in the Platform.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInterfaces"
+                ],
+                "summary": "Get All Twin Interfaces",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.TwinInterface"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "This endpoint creates the Twin Interface.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInterfaces"
+                ],
+                "summary": "Create Twin Interface",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInterface"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-interfaces/{id}": {
+            "get": {
+                "description": "This endpoint returns the Twin Interface by id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInterfaces"
+                ],
+                "summary": "Get Twin Interface by Id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInterface"
+                        }
+                    }
+                }
+            }
+        },
+        "/twin-interfaces/{instanceId}": {
+            "delete": {
+                "description": "This endpoint deletes the Twin Interface.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "TwinInterfaces"
+                ],
+                "summary": "Delete Twin Interface",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.TwinInterface"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.TwinEvent": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "eventData": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceId": {
+                    "type": "string"
+                },
+                "interfaceId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.TwinInstance": {
+            "type": "object",
+            "required": [
+                "id",
+                "interfaceId",
+                "name"
+            ],
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "interfaceId": {
+                    "type": "string"
+                },
+                "lastEventData": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.TwinInterface": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "dataDefinition": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
