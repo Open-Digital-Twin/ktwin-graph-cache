@@ -1,95 +1,35 @@
 definitions:
-  domain.TwinEvent:
+  domain.TwinGraph:
     properties:
-      createdAt:
-        type: string
-      eventData:
+      twinInstances:
         items:
-          type: integer
+          $ref: '#/definitions/domain.TwinInstanceEnvironmentSettings'
         type: array
-      id:
-        type: string
-      instanceId:
-        type: string
-      interfaceId:
-        type: string
-      source:
-        type: string
-      time:
-        type: string
-      type:
-        type: string
     type: object
-  domain.TwinInstance:
+  domain.TwinInstanceEnvironmentSettings:
     properties:
-      active:
-        type: boolean
-      createdAt:
-        type: string
-      id:
-        type: string
-      interfaceId:
-        type: string
-      lastEventData:
+      interface:
         type: string
       name:
         type: string
-      parent:
-        type: string
-    required:
-    - id
-    - interfaceId
-    - name
+      relationships:
+        items:
+          $ref: '#/definitions/domain.TwinInstanceRelationshipSettings'
+        type: array
     type: object
-  domain.TwinInterface:
+  domain.TwinInstanceRelationshipSettings:
     properties:
-      active:
-        type: boolean
-      createdAt:
+      instance:
         type: string
-      dataDefinition:
-        type: string
-      id:
+      interface:
         type: string
       name:
-        type: string
-      parent:
         type: string
     type: object
 info:
   contact: {}
 paths:
-  /twin-Instances:
-    post:
-      consumes:
-      - application/json
-      description: This endpoint creates the Twin Instance.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInstance'
-      summary: Create Twin Instance
-      tags:
-      - TwinInstances
-  /twin-Instances/{instanceId}:
-    delete:
-      consumes:
-      - application/json
-      description: This endpoint deletes the Twin Instance.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInstance'
-      summary: Delete Twin Instance
-      tags:
-      - TwinInstances
-  /twin-events:
+  /twin-graph:
     get:
       consumes:
       - application/json
@@ -101,145 +41,23 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/domain.TwinEvent'
+              $ref: '#/definitions/domain.TwinGraph'
             type: array
-      summary: Get Twin Events
+      summary: Get Twin Graph
       tags:
-      - TwinEvents
+      - TwinGraphs
     post:
       consumes:
       - application/json
-      description: This endpoint updates the latest TwinEvent.
+      description: This endpoint updates the latest TwinGraph.
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/domain.TwinEvent'
-      summary: Update Twin Event
+            $ref: '#/definitions/domain.TwinGraph'
+      summary: Update Twin Graph
       tags:
-      - TwinEvents
-  /twin-events/{interfaceId}/{instanceId}:
-    delete:
-      consumes:
-      - application/json
-      description: This endpoint deletes the Twin Event Event.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-      summary: Delete Twin Event Event
-      tags:
-      - TwinEvents
-    get:
-      consumes:
-      - application/json
-      description: do ping
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/domain.TwinEvent'
-            type: array
-      summary: Get Twin Events
-      tags:
-      - TwinEvents
-  /twin-instances:
-    get:
-      consumes:
-      - application/json
-      description: This endpoint returns all Twin Instances registered in the Platform.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/domain.TwinInstance'
-            type: array
-      summary: Get All Twin Instances
-      tags:
-      - TwinInstances
-  /twin-instances/{instanceId}/{id}:
-    get:
-      consumes:
-      - application/json
-      description: This endpoint returns the Twin Instance by id.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInstance'
-      summary: Get Twin Instance by Id
-      tags:
-      - TwinInstances
-  /twin-interfaces:
-    get:
-      consumes:
-      - application/json
-      description: This endpoint returns all Twin Interfaces registered in the Platform.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/domain.TwinInterface'
-            type: array
-      summary: Get All Twin Interfaces
-      tags:
-      - TwinInterfaces
-    post:
-      consumes:
-      - application/json
-      description: This endpoint creates the Twin Interface.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInterface'
-      summary: Create Twin Interface
-      tags:
-      - TwinInterfaces
-  /twin-interfaces/{id}:
-    get:
-      consumes:
-      - application/json
-      description: This endpoint returns the Twin Interface by id.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInterface'
-      summary: Get Twin Interface by Id
-      tags:
-      - TwinInterfaces
-  /twin-interfaces/{instanceId}:
-    delete:
-      consumes:
-      - application/json
-      description: This endpoint deletes the Twin Interface.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.TwinInterface'
-      summary: Delete Twin Interface
-      tags:
-      - TwinInterfaces
+      - TwinGraphs
 swagger: "2.0"
