@@ -3,6 +3,7 @@ package cluster
 import (
 	"context"
 	"flag"
+	"os"
 	"path/filepath"
 
 	"k8s.io/client-go/kubernetes"
@@ -53,8 +54,34 @@ func (c *clusterClient) localConnect() error {
 	return nil
 }
 
+func (c *clusterClient) connect() error {
+	if c.isConnected {
+		return nil
+	}
+
+	// creates the in-cluster config
+	config, err := rest.InClusterConfig()
+	if err != nil {
+		return err
+	}
+
+	// creates the clientset
+	c.clientSet, err = kubernetes.NewForConfig(config)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (c *clusterClient) GetResources(absPath, namespace, resource string) (rest.Result, error) {
-	err := c.localConnect()
+	var err error
+
+	if os.Getenv("LOCAL") == "true" {
+		err = c.localConnect()
+	} else {
+		err = c.connect()
+	}
 
 	if err != nil {
 		return rest.Result{}, err
