@@ -36,5 +36,13 @@ kubectl run curl \
     --image=curlimages/curl --rm=true --restart=Never -ti -- \
     -X GET -v \
     -H "content-type: application/json"  \
+    http://ktwin-graph-store.ktwin.svc.cluster.local/api/v1/twin-graph/ngsi-ld-city-device
+```
+
+```sh
+kubectl run curl \
+    --image=curlimages/curl --rm=true --restart=Never -ti -- \
+    -X GET -v \
+    -H "content-type: application/json"  \
     http://ktwin-graph-store.ktwin.svc.cluster.local/health
 ```
