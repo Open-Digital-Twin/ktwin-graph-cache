@@ -34,7 +34,7 @@ spec:
               value: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
 ---
 apiVersion: v1
