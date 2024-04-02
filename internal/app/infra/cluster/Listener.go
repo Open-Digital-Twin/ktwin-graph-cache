@@ -14,7 +14,7 @@ func NewClusterListener(cacheConnection cache.CacheConnection, logger log.Logger
 	return &clusterListener{
 		logger:          logger,
 		cacheConnection: cacheConnection,
-		clusterClient:   NewClusterClient(),
+		clusterClient:   NewClusterClient(logger),
 	}
 }
 

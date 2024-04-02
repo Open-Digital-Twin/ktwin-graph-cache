@@ -3,17 +3,21 @@ package cluster
 import (
 	"context"
 	"flag"
+	"fmt"
 	"os"
 	"path/filepath"
 
+	"github.com/Open-Digital-Twin/ktwin-graph-store/internal/pkg/log"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
 )
 
-func NewClusterClient() ClusterClient {
-	return &clusterClient{}
+func NewClusterClient(logger log.Logger) ClusterClient {
+	return &clusterClient{
+		logger: logger,
+	}
 }
 
 type ClusterClient interface {
@@ -23,6 +27,7 @@ type ClusterClient interface {
 type clusterClient struct {
 	isConnected bool
 	clientSet   *kubernetes.Clientset
+	logger      log.Logger
 }
 
 func (c *clusterClient) localConnect() error {
@@ -41,6 +46,7 @@ func (c *clusterClient) localConnect() error {
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
 	if err != nil {
+		c.logger.Error(fmt.Sprintf("Error building kubeconfig: %v", err))
 		return err
 	}
 
@@ -48,6 +54,7 @@ func (c *clusterClient) localConnect() error {
 	c.clientSet, err = kubernetes.NewForConfig(config)
 
 	if err != nil {
+		c.logger.Error(fmt.Sprintf("Error creating client set: %v", err))
 		return err
 	}
 
@@ -62,12 +69,14 @@ func (c *clusterClient) connect() error {
 	// creates the in-cluster config
 	config, err := rest.InClusterConfig()
 	if err != nil {
+		c.logger.Error(fmt.Sprintf("Error creating in-cluster config: %v", err))
 		return err
 	}
 
 	// creates the clientset
 	c.clientSet, err = kubernetes.NewForConfig(config)
 	if err != nil {
+		c.logger.Error(fmt.Sprintf("Error creating client set: %v", err))
 		return err
 	}
 
