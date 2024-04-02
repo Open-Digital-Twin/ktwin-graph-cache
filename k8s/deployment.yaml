@@ -18,19 +18,20 @@ spec:
         app.kubernetes.io/component: ktwin-graph-store
         app.kubernetes.io/part-of: ktwin
     spec:
+      serviceAccountName: ktwin-twin-graph-store-sa
       containers:
         - name: ktwin-graph-store
           image: ghcr.io/open-digital-twin/ktwin-graph-store:0.1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
             - name: CACHE_HOST
-              value: ktwin-graph-redis-master.ktwin.svc.cluster.local
+              value: ktwin-graph-redis-master.ktwin.svc.cluster.local:6379
             - name: CACHE_HOST_REPLICAS
-              value: ktwin-graph-redis-replicas.ktwin.svc.cluster.local
+              value: ktwin-graph-redis-replicas.ktwin.svc.cluster.local:6379
             - name: CACHE_PASSWORD
-              value: ZVlWWDdFd1ZtbXhLUENEbXdNdHlLVmdlOG9MZDJ0ODE=
+              value: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
           resources:
             limits:
               memory: "128Mi"

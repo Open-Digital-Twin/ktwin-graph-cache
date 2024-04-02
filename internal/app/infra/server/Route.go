@@ -13,4 +13,5 @@ func ConfigureRoutes(r *gin.Engine, appController Controller) {
 			tg.GET("/:interfaceId", appController.GetTwinGraphByTwinInstance)
 		}
 	}
+	r.Group("/health").GET("", GetHealth)
 }
