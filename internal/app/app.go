@@ -14,8 +14,9 @@ func StartApp() {
 	cacheConnection := cache.NewCacheConnection()
 	logger := log.NewLogger()
 
+	listenTime := config.GetConfigInt("LISTEN_TIME", 60)
 	clusterListeners := cluster.NewClusterListener(cacheConnection, logger)
-	clusterListeners.Listen()
+	clusterListeners.Listen(listenTime)
 
 	httpServer := server.NewHttpServer(cacheConnection)
 	httpServer.Configure()

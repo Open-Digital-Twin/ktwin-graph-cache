@@ -5,6 +5,7 @@ import (
 	"os"
 	"path"
 	"runtime"
+	"strconv"
 
 	"github.com/joho/godotenv"
 )
@@ -25,6 +26,15 @@ func Load() {
 
 func GetConfig(key string) string {
 	return os.Getenv(key)
+}
+
+func GetConfigInt(key string, defaultValue int) int {
+	configValue := os.Getenv(key)
+	configInt, err := strconv.Atoi(configValue)
+	if err != nil {
+		return defaultValue
+	}
+	return configInt
 }
 
 func getConfigDir() string {

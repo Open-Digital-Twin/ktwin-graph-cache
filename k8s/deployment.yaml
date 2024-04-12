@@ -32,6 +32,8 @@ spec:
               value: ktwin-graph-redis-replicas.ktwin.svc.cluster.local:6379
             - name: CACHE_PASSWORD
               value: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+            - name: LISTEN_TIME
+              value: "200"
           resources:
             limits:
               memory: "512Mi"

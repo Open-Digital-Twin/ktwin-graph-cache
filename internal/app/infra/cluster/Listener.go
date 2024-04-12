@@ -19,7 +19,7 @@ func NewClusterListener(cacheConnection cache.CacheConnection, logger log.Logger
 }
 
 type ClusterListener interface {
-	Listen()
+	Listen(waitTime int)
 }
 
 type clusterListener struct {
@@ -28,12 +28,13 @@ type clusterListener struct {
 	cacheConnection cache.CacheConnection
 }
 
-func (c *clusterListener) Listen() {
+func (c *clusterListener) Listen(waitTime int) {
+	c.logger.Info(fmt.Sprintf("Listen wait time: %d\n", waitTime))
 	go func() {
 		for {
 			c.logger.Info("Listening for twin instances\n")
 			c.listenTwinInstances()
-			time.Sleep(100 * time.Second)
+			time.Sleep(time.Duration(waitTime) * time.Second)
 		}
 	}()
 }
