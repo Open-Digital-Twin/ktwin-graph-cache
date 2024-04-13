@@ -1,0 +1,5 @@
+### Variables 
+@apiurl = http://localhost:8080
+
+### GET Twin Graph
+GET {{apiurl}}/api/v1/twin-graph HTTP/1.1
