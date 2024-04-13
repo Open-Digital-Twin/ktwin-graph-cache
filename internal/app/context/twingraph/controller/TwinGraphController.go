@@ -59,8 +59,6 @@ func (t *twinGraphController) GetTwinGraph(g *gin.Context) {
 		g.JSON(http.StatusInternalServerError, "Error: "+err.Error())
 		t.logger.Error("Error: " + err.Error())
 		return
-	} else if reflect.DeepEqual(twinGraph, domain.TwinGraph{}) {
-		g.JSON(http.StatusNotFound, "Not Found")
 	} else {
 		g.JSON(http.StatusOK, twinGraph)
 	}
