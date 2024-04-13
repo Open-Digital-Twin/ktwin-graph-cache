@@ -16,22 +16,29 @@ type CacheConnection interface {
 func NewCacheConnection() CacheConnection {
 	host := config.GetConfig("CACHE_HOST")
 	password := config.GetConfig("CACHE_PASSWORD")
-	client := redis.NewClient(&redis.Options{
-		Addr:     host,
-		Password: password,
-		DB:       0,
-	})
+	replicaHost := config.GetConfig("CACHE_HOST_REPLICAS")
+
 	return &cacheConnection{
-		client: client,
+		client: redis.NewClient(&redis.Options{
+			Addr:     host,
+			Password: password,
+			DB:       0,
+		}),
+		replicasClient: redis.NewClient(&redis.Options{
+			Addr:     replicaHost,
+			Password: password,
+			DB:       0,
+		}),
 	}
 }
 
 type cacheConnection struct {
-	client *redis.Client
+	client         *redis.Client
+	replicasClient *redis.Client
 }
 
 func (c *cacheConnection) Get(ctx context.Context, key string, value interface{}) error {
-	result, err := c.client.Get(ctx, key).Result()
+	result, err := c.replicasClient.Get(ctx, key).Result()
 
 	if err != nil {
 		return nil
