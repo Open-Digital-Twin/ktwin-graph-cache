@@ -34,6 +34,8 @@ spec:
               value: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
             - name: LISTEN_TIME
               value: "200"
+            - name: CACHE_TTL
+              value: "250"
           resources:
             limits:
               memory: "512Mi"
